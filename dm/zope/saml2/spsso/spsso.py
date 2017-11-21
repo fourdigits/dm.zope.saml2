@@ -207,7 +207,7 @@ class SimpleSpsso(HomogenousContainer, Sso):
       decrypt = getUtility(IEncryption).decrypt
       for k in self.__keys:
         # try to decrypt and deserialize
-        try: return deserialize(decrypt(key, v))
+        try: return deserialize(decrypt(k, v))
         except:
           # probably a wrong key
           pass
@@ -247,7 +247,7 @@ class SimpleSpsso(HomogenousContainer, Sso):
         )
       if acs.description:
         acs_md.ServiceDescription.append(
-          ServiceDescription(asc.description, lang=acs.language)
+          ServiceDescription(acs.description, lang=acs.language)
           )
       for ad in ads:
         acs_md.RequestedAttribute.append(
